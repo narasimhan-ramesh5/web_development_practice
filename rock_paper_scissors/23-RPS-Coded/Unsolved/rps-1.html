@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Part 1</title>
+</head>
+
+<body>
+
+  <div id="game">
+    <h1>Welcome to Rock, Paper, Scissors</h1>
+    <h2>Type one of the following 'r', 'p' or 's'</h2>
+    <p>User chose <span id="user-choice">CHOICE</span></p>
+    <p>Computer chose <span id="computer-choice">CHOICE</span></p>
+    <p>User Score <span id="user-score">CHOICE</span></p>
+    <p>Computer Score <span id="computer-score">CHOICE</span></p>
+    <p>Ties<span id="ties">CHOICE</span></p>
+
+  </div>
+
+  <script type="text/javascript">
+    
+    var computer_score = 0;
+    var user_score = 0;
+    var ties = 0;
+
+    var game_over = false;
+
+    var choices = ['r','p','s'];
+
+    var computer_choice = 'r';
+    var user_choice = '';
+    
+    var i = 0;
+
+    var user_choice_text = document.getElementById("user-choice");
+    var computer_choice_text = document.getElementById("computer-choice");
+    var user_score_text = document.getElementById("user-score");
+    var computer_score_text = document.getElementById("computer-score");
+    var ties_text = document.getElementById("ties");
+
+
+    // Whenever a key is pressed, alert "pressed a button".
+    document.onkeyup = function(event) {
+      user_choice = event.key;
+      computer_choice = choices[getRandomInt(3)];
+
+      console.log("Iteration "+i+" user entered "+user_choice+" computer chose "+computer_choice);
+
+      user_choice_text.textContent = event.key;
+      computer_choice_text.textContent = computer_choice;
+
+
+      if('r' != user_choice && 'p' != user_choice && 's' != user_choice){
+        alert("Please enter either r, p or s");
+      }
+      else{
+        // Evaluate win-loss
+        if(computer_choice == 'r' && user_choice == "p" || 
+           computer_choice == 'p' && user_choice == "s" ||
+           computer_choice == 's' && user_choice == "r"){
+             user_score += 1;
+             console.log("User won");
+             user_score_text.textContent = user_score;
+        }
+        else if(computer_choice == user_choice){
+          ties += 1;
+          console.log("Tie");
+          ties_text.textContent = ties;
+        }
+        else{
+          computer_score += 1;
+          console.log("Computer won");
+          computer_score_text.textContent = computer_score;
+        }
+      }
+      i++;
+    };
+
+
+    function getRandomInt(seed) {
+      return Math.floor(Math.random() * Math.floor(seed));
+    }
+
+
+  </script>
+
+</body>
+
+</html>
